@@ -4,9 +4,21 @@
         <script src="/socket.io/socket.io.js"></script>
         <script>
             const socket = io();
+            
+            document.getElementById("createGame").addEventListener("submit", e => {
+                e.preventDefault();
+                let name = document.getElementById("name").value;
+                let questions = document.getElementById("questions");
+                
+                socket.emit("create", { name: name, questions: questions });
+            }
         </script>
     </head>
     <body>
-        <p>Yo Again</p>
+        <form id="createGame">
+            <input type="text" placeholder="Name Of Game" id="name" requried maxlength=20 />
+            <input type="file" placeholder="Question File" id="questions" required />
+            <button type="submit" id="sub">Create</button>
+        </form>
     </body>
 </html>
